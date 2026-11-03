@@ -1,0 +1,4 @@
+Archivo: moves.txt | movimientos: 224 | Ak inicial: a2
+Resultado de la lista completa: movimiento CORRECTO
+[C] n=100 (100 movs): 10 verificaciones = 17.70 us en total | promedio de 1000 repeticiones = 1.79 us por verificacion
+[C] n=total (224 movs): 10 verificaciones = 39.40 us en total | promedio de 1000 repeticiones = 3.98 us por verificacion

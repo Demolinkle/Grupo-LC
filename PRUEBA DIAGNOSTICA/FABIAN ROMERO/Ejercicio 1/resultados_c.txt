@@ -1,4 +1,0 @@
-Total de movimientos en la lista: 224  (Ak inicial=a2)
-Resultado lista completa: movimiento CORRECTO
-[C] n=100: 10 repeticiones, total=19.70 us, promedio=1.97 us
-[C] n=224: 10 repeticiones, total=22.90 us, promedio=2.29 us
