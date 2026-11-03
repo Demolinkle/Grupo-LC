@@ -1,0 +1,15 @@
+== Ejemplos (Python) ==
+Ak=a1 C=Kc2 Kd4 Kb3 Kc5 -> movimiento CORRECTO
+Ak=a1 C=Kc2 Kd4 Kb4 Kc5 -> INCORRECTO falla en el movimiento 3
+Ak=a2 C=Kc3 Ke4 Kf6 Ke8 Kg7 -> movimiento CORRECTO
+Ak=a2 C=Kc8 Ke4 Kf6 Ke8 Kg7 -> INCORRECTO falla en el movimiento 1
+Ak=a8 C=Kb6 Kd7 -> movimiento CORRECTO
+Ak=a8 C=Kb6 Kb7 -> INCORRECTO falla en el movimiento 2
+Ak=a1 C=Kc2 Kd4 Kf3 Ke5 Kg6 Kh8 Kf7 Kd8 Kc6 Kb4 -> movimiento CORRECTO
+Ak=a1 C=Kc2 Kd4 Kf3 Ke5 Kg6 Kh8 Kf7 Kd8 Kc6 Qb4 -> INCORRECTO falla letra Q no pertenece a un caballo.
+Ak=a1 C=Kc2 Kd4 Kf3 Ke5 Kg6 Kh8 Kf7 Kd8 Kh6 Kb4 -> INCORRECTO falla en el movimiento 9
+
+Total de movimientos en la lista: 224  (Ak inicial=a2)
+Resultado lista completa: movimiento CORRECTO
+[Python] n=100: 10 repeticiones, total=303.20 us, promedio=30.32 us
+[Python] n=224: 10 repeticiones, total=775.90 us, promedio=77.59 us
