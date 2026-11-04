@@ -3,8 +3,6 @@ Uso: python pascal.py [n] [x]     (n y x enteros no negativos; por defecto n=7, 
 import sys, time
 
 def pascal(n, triangulo=None):
-    """Fila n del triangulo de Pascal. Memoria dinamica: una sola lista que crece
-    con append y se actualiza de derecha a izquierda (O(n) memoria, O(n^2) tiempo)."""
     fila = [1]
     if triangulo is not None:
         triangulo.append("  n=0: 1")
