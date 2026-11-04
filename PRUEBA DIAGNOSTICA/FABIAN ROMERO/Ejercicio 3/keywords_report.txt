@@ -1,0 +1,79 @@
+=== KEYWORDS REPORT ===
+Analyzed file: palabras.c (3832 bytes loaded into dynamic memory)
+
+-> 'struct' translated to 'estructura'
+-> 'char' translated to 'caracter'
+-> 'char' translated to 'caracter'
+-> 'int' translated to 'entero'
+-> 'int' translated to 'entero'
+-> 'char' translated to 'caracter'
+-> 'float' translated to 'flotante'
+-> 'double' translated to 'doble'
+-> 'if' translated to 'si'
+-> 'else' translated to 'sino'
+-> 'for' translated to 'para'
+-> 'while' translated to 'mientras'
+-> 'return' translated to 'retornar'
+-> 'void' translated to 'vacio'
+-> 'struct' translated to 'estructura'
+-> 'break' translated to 'romper'
+-> 'switch' translated to 'segun'
+-> 'case' translated to 'caso'
+-> 'default' translated to 'por_defecto'
+-> 'char' translated to 'caracter'
+-> 'char' translated to 'caracter'
+-> 'if' translated to 'si'
+-> 'return' translated to 'retornar'
+-> 'char' translated to 'caracter'
+-> 'if' translated to 'si'
+-> 'return' translated to 'retornar'
+-> 'int' translated to 'entero'
+-> 'while' translated to 'mientras'
+-> 'if' translated to 'si'
+-> 'char' translated to 'caracter'
+-> 'if' translated to 'si'
+-> 'return' translated to 'retornar'
+-> 'char' translated to 'caracter'
+-> 'return' translated to 'retornar'
+-> 'int' translated to 'entero'
+-> 'int' translated to 'entero'
+-> 'char' translated to 'caracter'
+-> 'if' translated to 'si'
+-> 'return' translated to 'retornar'
+-> 'char' translated to 'caracter'
+-> 'if' translated to 'si'
+-> 'return' translated to 'retornar'
+-> 'while' translated to 'mientras'
+-> 'if' translated to 'si'
+-> 'while' translated to 'mientras'
+-> 'char' translated to 'caracter'
+-> 'if' translated to 'si'
+-> 'int' translated to 'entero'
+-> 'for' translated to 'para'
+-> 'if' translated to 'si'
+-> 'break' translated to 'romper'
+-> 'if' translated to 'si'
+-> 'else' translated to 'sino'
+-> 'int' translated to 'entero'
+-> 'for' translated to 'para'
+-> 'if' translated to 'si'
+-> 'return' translated to 'retornar'
+
+=== OCCURRENCE SUMMARY ===
+int -> entero : 7 times
+char -> caracter : 11 times
+float -> flotante : 1 times
+double -> doble : 1 times
+if -> si : 12 times
+else -> sino : 2 times
+for -> para : 3 times
+while -> mientras : 4 times
+return -> retornar : 8 times
+void -> vacio : 1 times
+struct -> estructura : 2 times
+break -> romper : 2 times
+switch -> segun : 1 times
+case -> caso : 1 times
+default -> por_defecto : 1 times
+
+Total reserved keywords found: 57

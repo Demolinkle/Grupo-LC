@@ -1,123 +1,129 @@
-/* Detecta palabras reservadas de C en un archivo fuente cargado en memoria
-   dinamica (malloc/realloc) y las traduce al espanol.
-   Uso: palabras archivo.c [traducido.txt] [reporte.txt] */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
-typedef struct { const char *c; const char *es; int cont; } Palabra;
+// Structure to associate C keywords with their translation
+typedef struct {
+    const char *english;
+    const char *spanish;
+    int counter;
+} Keyword;
 
-/* 32 palabras de C89 + las agregadas en C99 y C11 */
-static Palabra tabla[] = {
-    {"auto","automatico",0},{"break","romper",0},{"case","caso",0},{"char","caracter",0},
-    {"const","constante",0},{"continue","continuar",0},{"default","pordefecto",0},{"do","hacer",0},
-    {"double","doble",0},{"else","sino",0},{"enum","enumeracion",0},{"extern","externo",0},
-    {"float","flotante",0},{"for","para",0},{"goto","irA",0},{"if","si",0},
-    {"int","entero",0},{"long","largo",0},{"register","registro",0},{"return","retornar",0},
-    {"short","corto",0},{"signed","consigno",0},{"sizeof","tamanoDe",0},{"static","estatico",0},
-    {"struct","estructura",0},{"switch","segun",0},{"typedef","definirTipo",0},{"union","union",0},
-    {"unsigned","sinsigno",0},{"void","vacio",0},{"volatile","volatil",0},{"while","mientras",0},
-    /* C99 */
-    {"inline","enlinea",0},{"restrict","restringido",0},{"_Bool","_Booleano",0},
-    {"_Complex","_Complejo",0},{"_Imaginary","_Imaginario",0},
-    /* C11 */
-    {"_Alignas","_AlinearComo",0},{"_Alignof","_AlineacionDe",0},{"_Atomic","_Atomico",0},
-    {"_Generic","_Generico",0},{"_Noreturn","_SinRetorno",0},{"_Static_assert","_AfirmacionEstatica",0},
-    {"_Thread_local","_LocalDeHilo",0}
+// Table containing the main C reserved keywords
+static Keyword table[] = {
+    {"int", "entero", 0},
+    {"char", "caracter", 0},
+    {"float", "flotante", 0},
+    {"double", "doble", 0},
+    {"if", "si", 0},
+    {"else", "sino", 0},
+    {"for", "para", 0},
+    {"while", "mientras", 0},
+    {"return", "retornar", 0},
+    {"void", "vacio", 0},
+    {"struct", "estructura", 0},
+    {"break", "romper", 0},
+    {"switch", "segun", 0},
+    {"case", "caso", 0},
+    {"default", "por_defecto", 0}
 };
-#define NP (sizeof tabla / sizeof tabla[0])
+#define NUM_KEYWORDS (sizeof(table) / sizeof(table[0]))
 
-/* Carga todo el archivo en un bloque de memoria que crece con realloc */
-static char *cargar(const char *ruta, size_t *len) {
-    FILE *f = fopen(ruta, "rb");
+// 1. Dynamic file loading into memory using malloc and realloc
+char* load_file(const char *path, size_t *size_out) {
+    FILE *f = fopen(path, "r");
     if (!f) return NULL;
-    size_t cap = 256, n = 0, r;
-    char *buf = malloc(cap);
-    if (!buf) { fclose(f); return NULL; }
-    while ((r = fread(buf + n, 1, cap - n - 1, f)) > 0) {
-        n += r;
-        if (n + 1 >= cap) {
-            cap *= 2;
-            char *tmp = realloc(buf, cap);
-            if (!tmp) { free(buf); fclose(f); return NULL; }
-            buf = tmp;
-        }
-    }
-    buf[n] = '\0';
-    fclose(f);
-    *len = n;
-    return buf;
-}
 
-static Palabra *buscar(const char *w) {
-    for (size_t i = 0; i < NP; i++) if (strcmp(tabla[i].c, w) == 0) return &tabla[i];
-    return NULL;
+    size_t capacity = 512, size = 0;
+    char *buffer = malloc(capacity);
+    if (!buffer) { fclose(f); return NULL; }
+
+    int c;
+    while ((c = fgetc(f)) != EOF) {
+        if (size + 1 >= capacity) {
+            capacity *= 2;
+            char *temp = realloc(buffer, capacity);
+            if (!temp) { free(buffer); fclose(f); return NULL; }
+            buffer = temp;
+        }
+        buffer[size++] = (char)c;
+    }
+    buffer[size] = '\0';
+    fclose(f);
+    *size_out = size;
+    return buffer;
 }
 
 int main(int argc, char **argv) {
-    if (argc < 2) { fprintf(stderr, "Uso: %s archivo.c [traducido.txt] [reporte.txt]\n", argv[0]); return 1; }
-    const char *rtrad = argc > 2 ? argv[2] : "traducido.txt";
-    const char *rrep  = argc > 3 ? argv[3] : "reporte.txt";
-    size_t n;
-    char *src = cargar(argv[1], &n);
-    if (!src) { fprintf(stderr, "No se pudo leer '%s'\n", argv[1]); return 1; }
+    if (argc < 2) {
+        printf("Usage: %s source_file.c\n", argv[0]);
+        return 1;
+    }
 
-    FILE *ft = fopen(rtrad, "w"), *fr = fopen(rrep, "w");
-    if (!ft || !fr) { fprintf(stderr, "No se pudieron crear los archivos de salida\n"); free(src); return 1; }
-    fprintf(fr, "Archivo analizado: %s (%zu bytes cargados en memoria dinamica)\n\nOcurrencias:\n", argv[1], n);
+    size_t size;
+    char *content = load_file(argv[1], &size);
+    if (!content) {
+        printf("Error: Could not read the file.\n");
+        return 1;
+    }
 
-    int linea = 1, total = 0;
+    FILE *f_trad = fopen("translated_code.txt", "w");
+    FILE *f_rep = fopen("keywords_report.txt", "w");
+
+    fprintf(f_rep, "=== KEYWORDS REPORT ===\n");
+    fprintf(f_rep, "Analyzed file: %s (%zu bytes loaded into dynamic memory)\n\n", argv[1], size);
+
+    // 2. Parse the dynamic buffer character by character
     size_t i = 0;
-    while (i < n) {
-        char c = src[i];
-        if (c == '/' && i + 1 < n && src[i+1] == '/') {            /* comentario de linea */
-            while (i < n && src[i] != '\n') fputc(src[i++], ft);
-        } else if (c == '/' && i + 1 < n && src[i+1] == '*') {     /* comentario de bloque */
-            fputc(src[i++], ft); fputc(src[i++], ft);
-            while (i < n && !(src[i] == '*' && i + 1 < n && src[i+1] == '/')) {
-                if (src[i] == '\n') linea++;
-                fputc(src[i++], ft);
+    while (i < size) {
+        if (isalpha(content[i]) || content[i] == '_') {
+            size_t start = i;
+            while (i < size && (isalnum(content[i]) || content[i] == '_')) {
+                i++;
             }
-            if (i < n) { fputc(src[i++], ft); fputc(src[i++], ft); }
-        } else if (c == '"' || c == '\'') {                        /* cadena o caracter */
-            char q = c;
-            fputc(src[i++], ft);
-            while (i < n && src[i] != q && src[i] != '\n') {
-                if (src[i] == '\\' && i + 1 < n) fputc(src[i++], ft);
-                fputc(src[i++], ft);
+            size_t len = i - start;
+            char *word = malloc(len + 1);
+            memcpy(word, &content[start], len);
+            word[len] = '\0';
+
+            // Check if the word is a reserved keyword
+            int found = 0;
+            for (size_t j = 0; j < NUM_KEYWORDS; j++) {
+                if (strcmp(word, table[j].english) == 0) {
+                    table[j].counter++;
+                    fprintf(f_trad, "%s", table[j].spanish);
+                    fprintf(f_rep, "-> '%s' translated to '%s'\n", table[j].english, table[j].spanish);
+                    found = 1;
+                    break;
+                }
             }
-            if (i < n && src[i] == q) fputc(src[i++], ft);
-        } else if (isalpha((unsigned char)c) || c == '_') {        /* identificador */
-            size_t ini = i;
-            while (i < n && (isalnum((unsigned char)src[i]) || src[i] == '_')) i++;
-            size_t l = i - ini;
-            char *w = malloc(l + 1);                               /* palabra en memoria dinamica */
-            memcpy(w, src + ini, l); w[l] = '\0';
-            Palabra *p = buscar(w);
-            if (p) {
-                p->cont++; total++;
-                fprintf(fr, "  linea %d: %s -> %s\n", linea, p->c, p->es);
-                fputs(p->es, ft);
-            } else fputs(w, ft);
-            free(w);
+            if (!found) {
+                fprintf(f_trad, "%s", word);
+            }
+            free(word);
         } else {
-            if (c == '\n') linea++;
-            fputc(c, ft); i++;
+            fputc(content[i], f_trad);
+            i++;
         }
     }
 
-    fprintf(fr, "\nResumen (palabra reservada -> espanol : veces):\n");
-    int distintas = 0;
-    for (size_t k = 0; k < NP; k++)
-        if (tabla[k].cont) { distintas++; fprintf(fr, "  %-14s -> %-20s : %d\n", tabla[k].c, tabla[k].es, tabla[k].cont); }
-    if (!total) fprintf(fr, "  (no se encontraron palabras reservadas)\n");
-    fprintf(fr, "\nTotal de ocurrencias: %d (%d palabras reservadas distintas)\n", total, distintas);
+    // 3. Write summary to the report
+    fprintf(f_rep, "\n=== OCCURRENCE SUMMARY ===\n");
+    int total = 0;
+    for (size_t j = 0; j < NUM_KEYWORDS; j++) {
+        if (table[j].counter > 0) {
+            fprintf(f_rep, "%s -> %s : %d times\n", table[j].english, table[j].spanish, table[j].counter);
+            total += table[j].counter;
+        }
+    }
+    fprintf(f_rep, "\nTotal reserved keywords found: %d\n", total);
 
-    fclose(ft); fclose(fr); free(src);
-    FILE *r2 = fopen(rrep, "r"); int ch;
-    while ((ch = fgetc(r2)) != EOF) putchar(ch);
-    fclose(r2);
-    printf("\nCodigo traducido guardado en: %s\nReporte guardado en: %s\n", rtrad, rrep);
+    // Close files and free the main dynamic memory buffer
+    fclose(f_trad);
+    fclose(f_rep);
+    free(content);
+
+    printf("Process successful!\nFiles generated: 'translated_code.txt' and 'keywords_report.txt'\n");
     return 0;
 }
