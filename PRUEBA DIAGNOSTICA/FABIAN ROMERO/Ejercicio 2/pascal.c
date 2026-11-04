@@ -20,7 +20,7 @@ char* u128_a_str(u128 v, char *buf) {
 u128* generar_pascal(int n) {
     u128 *fila = malloc((n + 1) * sizeof(u128));
     if (!fila) return NULL;
-    
+
     fila[0] = 1;
     for (int i = 1; i <= n; i++) {
         fila[i] = 1;
@@ -36,8 +36,18 @@ int main(int argc, char **argv) {
     int n = argc > 1 ? atoi(argv[1]) : 5;
     uint64_t x = argc > 2 ? strtoull(argv[2], NULL, 10) : 2;
 
-    if (n < 0) {
-        fprintf(stderr, "El valor de n debe ser no negativo.\n");
+    if (n < 0 || n > 130) {
+        fprintf(stderr, "n debe estar entre 0 y 130.\n");
+        return 1;
+    }
+    if (argc > 2 && argv[2][0] == '-') {
+        fprintf(stderr, "x debe ser no negativo.\n");
+        return 1;
+    }
+
+    // Todo lo que se imprima a partir de aquí se guarda en el txt
+    if (freopen("resultados_pascal_c.txt", "w", stdout) == NULL) {
+        fprintf(stderr, "No se pudo crear resultados_pascal_c.txt\n");
         return 1;
     }
 
@@ -45,12 +55,12 @@ int main(int argc, char **argv) {
     u128 *coefs = generar_pascal(n);
     char buf[64];
 
-    // Mostrar el polinomio generado
+    // Mostrar el polinomio generado (el coeficiente 1 no se escribe)
     printf("Polinomio f(x) = (x+1)^%d:\nf(x) = ", n);
     for (int k = 0; k <= n; k++) {
         int p = n - k;
         if (k > 0) printf(" + ");
-        printf("%s", u128_a_str(coefs[k], buf));
+        if (!(coefs[k] == 1 && p > 0)) printf("%s", u128_a_str(coefs[k], buf));
         if (p == 1) printf("x");
         else if (p > 1) printf("x^%d", p);
     }
@@ -62,11 +72,11 @@ int main(int argc, char **argv) {
 
     for (int k = 0; k <= n; k++) {
         int p = n - k;
-        
+
         // Calcular x^p
         u128 x_pow = 1;
         for (int i = 0; i < p; i++) x_pow *= x;
-        
+
         u128 termino = coefs[k] * x_pow;
         total += termino;
 
@@ -87,10 +97,11 @@ int main(int argc, char **argv) {
         free(f100);
     }
     clock_t t1 = clock();
-    double tiempo_ms = (double)(t1 - t1) * 1000.0 / CLOCKS_PER_SEC; // Simulado para benchmark limpio
-    printf("\n[Benchmark C] Generar Pascal n=100 completado exitosamente.\n");
+    double tiempo_us = (double)(t1 - t0) * 1000000.0 / CLOCKS_PER_SEC / reps;
+    printf("\n[C] n=100: generar coeficientes = %.2f us (promedio de %d repeticiones)\n", tiempo_us, reps);
 
     // Liberar memoria dinámica principal
     free(coefs);
+    fprintf(stderr, "Resultados guardados en resultados_pascal_c.txt\n");
     return 0;
 }

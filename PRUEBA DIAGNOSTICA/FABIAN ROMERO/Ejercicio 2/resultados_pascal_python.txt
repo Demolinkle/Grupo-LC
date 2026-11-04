@@ -23,5 +23,5 @@ f(2) = 2187
 Verificacion (2+1)^7 = 2187
 Coinciden: SI
 
-[Python] n=100: generar coeficientes = 440.87 us (promedio de 1000 repeticiones)
-[Python] n=100, x=2: generar + evaluar = 645.29 us (promedio de 1000 repeticiones)
+[Python] n=100: generar coeficientes = 1822.96 us (promedio de 1000 repeticiones)
+[Python] n=100, x=2: generar + evaluar = 1349.42 us (promedio de 1000 repeticiones)
