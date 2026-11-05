@@ -13,4 +13,4 @@ Calculo paso a paso para x = 2:
 
 Resultado final f(2) = 2187
 
-[C] n=100: generar coeficientes = 14.00 us (promedio de 1000 repeticiones)
+[C] n=100: generar coeficientes = 54.00 us (promedio de 1000 repeticiones)

@@ -1,4 +1,4 @@
 Archivo: moves.txt | Total movimientos: 224 | Inicio: a2
 Resultado: movimiento CORRECTO
-n=100 (10 pruebas): 15.10 us
-n=224 (10 pruebas): 32.30 us
+n=100 (10 pruebas): 96.50 us
+n=224 (10 pruebas): 172.00 us

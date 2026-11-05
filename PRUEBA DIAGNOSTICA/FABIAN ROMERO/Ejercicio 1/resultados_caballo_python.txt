@@ -1,4 +1,4 @@
 Archivo: moves.txt | movimientos: 224 | Ak inicial: a2
 Resultado de la lista completa: movimiento CORRECTO
-[Python] n=100: 10 verificaciones = 469.90 us en total | promedio de 1000 repeticiones = 114.02 us por verificacion
-[Python] n=224: 10 verificaciones = 2053.80 us en total | promedio de 1000 repeticiones = 170.50 us por verificacion
+[Python] n=100: 10 verificaciones = 4635.60 us en total | promedio de 1000 repeticiones = 595.31 us por verificacion
+[Python] n=224: 10 verificaciones = 20582.90 us en total | promedio de 1000 repeticiones = 2306.43 us por verificacion

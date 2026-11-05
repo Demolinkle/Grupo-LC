@@ -1,0 +1,11 @@
+cd C:\Users\demol\Documents\Grupo-LC\PRUEBA DIAGNOSTICA\FABIAN ROMERO\Ejercicio 1
+
+python caballo.py --tiempo   
+
+caballo.exe moves.txt a2
+
+python pascal.py 7 2
+
+pascal.exe 7 2
+
+palabras.exe test.c
