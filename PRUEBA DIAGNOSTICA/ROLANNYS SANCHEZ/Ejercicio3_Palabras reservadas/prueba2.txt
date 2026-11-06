@@ -1,0 +1,13 @@
+
+int edad = 20;
+
+// int, float, char, if, else y return son palabras reservadas.
+
+/*
+    Este comentario contiene:
+    int
+    if
+    while
+*/
+
+return edad;
