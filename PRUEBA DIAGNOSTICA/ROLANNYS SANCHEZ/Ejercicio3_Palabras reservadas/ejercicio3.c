@@ -82,7 +82,6 @@ char *cargar_archivo(const char *nombre, size_t *longitud) {
         printf("Error: no se pudo abrir el archivo %s\n", nombre);
         return NULL;
     }
-
     size_t capacidad = 1024;
     size_t usados = 0;
 
@@ -93,7 +92,6 @@ char *cargar_archivo(const char *nombre, size_t *longitud) {
         fclose(archivo);
         return NULL;
     }
-
     int caracter;
 
     while ((caracter = fgetc(archivo)) != EOF) {
@@ -116,7 +114,6 @@ char *cargar_archivo(const char *nombre, size_t *longitud) {
 
         contenido[usados++] = (char)caracter;
     }
-
     contenido[usados] = '\0';
     *longitud = usados;
 
@@ -390,7 +387,7 @@ int main() {
     printf("   TRADUCTOR DE PALABRAS DE C\n");
     printf("====================================\n");
 
-    printf("Ingrese el nombre del archivo .c: ");
+    printf("Ingrese el nombre del archivo: ");
 
     if (scanf("%255s", nombre_entrada) != 1) {
         printf("Error al leer el nombre del archivo.\n");

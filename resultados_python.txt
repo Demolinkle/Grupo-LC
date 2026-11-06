@@ -1,0 +1,18 @@
+Ejercicio 2 - Triangulo de Pascal (Python)
+n = 100
+Repeticiones = 10
+
+Tiempos de ejecucion:
+Ejecucion 1: 1.83789991 ms
+Ejecucion 2: 1.90069992 ms
+Ejecucion 3: 1.84859987 ms
+Ejecucion 4: 1.70290004 ms
+Ejecucion 5: 1.59969972 ms
+Ejecucion 6: 10.44449955 ms
+Ejecucion 7: 1.99839985 ms
+Ejecucion 8: 1.95119996 ms
+Ejecucion 9: 2.73169996 ms
+Ejecucion 10: 6.88599981 ms
+
+Tiempo total: 32.90159861 ms
+Tiempo promedio: 3.29015986 ms
