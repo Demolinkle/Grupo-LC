@@ -1,0 +1,18 @@
+--- Resultados en Python ---
+
+a) Genere los coeficientes del polinomio (x+1)^n, muestre el resultado del polinomio:
+(x+1)^4 = x^4+4x^3+6x^2+4x+1
+
+b) Calcule f(x) = (x+1)^n según el polinomio generado (mostrando pasos):
+Cálculo paso a paso para f(x) = (x+1)^2 con x = 7:
+  Término 1: 1 * (7)^2 = 49
+  Término 2: 2 * (7)^1 = 14
+  Término 3: 1 * (7)^0 = 1
+Suma total = 64
+Resultado final f(7) = 64.00
+
+c) Calcule el tiempo necesario para generar n=100:
+Para x = 2 y n = 100
+Resultado f(x): 5.153775e+47
+Tiempo de ejecucion: 0.002394 segundos
+
