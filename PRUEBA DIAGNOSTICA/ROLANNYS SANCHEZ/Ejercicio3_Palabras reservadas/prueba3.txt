@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int main() {
+    printf("int float char if else return while");
+
+    char inicial = 'A';
+
+    return 0;
+}
