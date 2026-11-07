@@ -1,0 +1,18 @@
+## [Python] Ejercicio 1 - Validacion de saltos de caballo ##
+
+### Autotest ###
+  [OK] a1 | Kc2 Kd4 Kb3 Kc5 -> movimiento CORRECTO
+  [OK] a1 | Kc2 Kd4 Kb4 Kc5 -> INCORRECTO falla en el movimiento 3
+  [OK] a2 | Kc3 Ke4 Kf6 Ke8 Kg7 -> movimiento CORRECTO
+  [OK] a2 | Kc8 Ke4 Kf6 Ke8 Kg7 -> INCORRECTO falla en el movimiento 1
+  [OK] a8 | Kb6 Kd7 -> movimiento CORRECTO
+  [OK] a8 | Kb6 Kb7 -> INCORRECTO falla en el movimiento 2
+  [OK] a1 | Kc2 Kd4 Kf3 Ke5 Kg6 Kh8 Kf7 Kd8 Kc6 Kb4 -> movimiento CORRECTO
+  [OK] a1 | Kc2 Kd4 Kf3 Ke5 Kg6 Kh8 Kf7 Kd8 Kc6 Qb4 -> INCORRECTO falla letra Q no pertenece a un caballo
+  [OK] a1 | Kc2 Kd4 Kf3 Ke5 Kg6 Kh8 Kf7 Kd8 Kh6 Kb4 -> INCORRECTO falla en el movimiento 9
+
+### Benchmark: 10 verificaciones de 500 movimientos (a2) ###
+  secuencia: 500 movimientos generados por el estudiante
+             (bloque base de 100 repetido)
+  resultado: movimiento CORRECTO
+  10 verificaciones: 18.4897 ms (promedio: 1.8490 ms)

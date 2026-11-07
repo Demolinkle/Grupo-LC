@@ -1,0 +1,4 @@
+
+Use Linux Xubutu version 20.04
+ Codeblock - version 20.03: especificamente para los codigo c.
+ Consola - version python 3.8.10 : especificamente para los codigo py.
