@@ -1,0 +1,9 @@
+int integer = 10;
+int entero = 20;
+
+float floatValue = 5.5;
+
+int whileLoop = 3;
+int returnValue = 0;
+
+return integer;

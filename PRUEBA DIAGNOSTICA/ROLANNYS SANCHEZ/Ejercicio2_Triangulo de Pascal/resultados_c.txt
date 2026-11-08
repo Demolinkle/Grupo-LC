@@ -1,0 +1,20 @@
+
+
+RESULTADOS DE EJECUCION EN C
+Valor de n: 100
+Repeticiones: 10
+
+Ejecucion 1: 2.42490000 ms
+Ejecucion 2: 4.43090000 ms
+Ejecucion 3: 2.31960000 ms
+Ejecucion 4: 2.41930000 ms
+Ejecucion 5: 2.75660000 ms
+Ejecucion 6: 2.68780000 ms
+Ejecucion 7: 2.52380000 ms
+Ejecucion 8: 2.36010000 ms
+Ejecucion 9: 2.62700000 ms
+Ejecucion 10: 2.39930000 ms
+
+Promedio: 2.69493000 ms
+
+

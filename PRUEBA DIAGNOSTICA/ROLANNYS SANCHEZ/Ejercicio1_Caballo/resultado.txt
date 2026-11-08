@@ -1,0 +1,27 @@
+========================================
+       VALIDACION DE MOVIMIENTOS
+========================================
+Posicion inicial: b4
+Cantidad de movimientos: 499
+
+Validacion de 10 ejecuciones:
+
+Ejecucion 1: CORRECTA | Tiempo: 1778400.00 ns
+Ejecucion 2: CORRECTA | Tiempo: 1668600.00 ns
+Ejecucion 3: CORRECTA | Tiempo: 2719700.00 ns
+Ejecucion 4: CORRECTA | Tiempo: 1687900.00 ns
+Ejecucion 5: CORRECTA | Tiempo: 6570000.00 ns
+Ejecucion 6: CORRECTA | Tiempo: 1871900.00 ns
+Ejecucion 7: CORRECTA | Tiempo: 1996700.00 ns
+Ejecucion 8: CORRECTA | Tiempo: 2869900.00 ns
+Ejecucion 9: CORRECTA | Tiempo: 2001000.00 ns
+Ejecucion 10: CORRECTA | Tiempo: 2895800.00 ns
+
+========================================
+          RESULTADOS FINALES
+========================================
+Total de ejecuciones: 10
+Tiempo acumulado: 26059900.00 ns
+Tiempo promedio: 2605990.00 ns
+Tiempo promedio en milisegundos: 2.60599 ms
+========================================
